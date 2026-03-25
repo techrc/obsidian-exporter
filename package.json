@@ -1,0 +1,95 @@
+{
+  "name": "obsidian-exporter",
+  "displayName": "Obsidian Exporter",
+  "description": "Export Cursor Agent conversations to Obsidian via Local REST API, saving them as Markdown notes with YAML frontmatter and callout formatting",
+  "version": "0.1.0",
+  "publisher": "techrc",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/techrc/obsidian-exporter.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "cursor",
+    "obsidian",
+    "agent",
+    "conversation",
+    "sync",
+    "markdown"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "obsidianExporter.syncCurrentChat",
+        "title": "Sync Current Chat to Obsidian",
+        "category": "Obsidian Exporter"
+      },
+      {
+        "command": "obsidianExporter.selectAndSync",
+        "title": "Select and Sync Chat to Obsidian",
+        "category": "Obsidian Exporter"
+      }
+    ],
+    "configuration": {
+      "title": "Obsidian Exporter",
+      "properties": {
+        "obsidianExporter.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Obsidian Local REST API key"
+        },
+        "obsidianExporter.apiUrl": {
+          "type": "string",
+          "default": "https://127.0.0.1:27124",
+          "description": "Obsidian Local REST API URL (default HTTPS port 27124)"
+        },
+        "obsidianExporter.vaultPath": {
+          "type": "string",
+          "default": "AI/Cursor",
+          "description": "Save path within the Obsidian vault"
+        },
+        "obsidianExporter.includeToolCalls": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include tool call details in the export"
+        },
+        "obsidianExporter.includeThinking": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include AI thinking process in the export"
+        },
+        "obsidianExporter.tags": {
+          "type": "array",
+          "default": [
+            "ai-conversation",
+            "cursor"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Tags added to the note frontmatter"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
